@@ -1,6 +1,8 @@
 <?php
 
-namespace MusementWeather\Domain;
+namespace MusementWeather\City\Domain;
+
+use MusementWeather\Shared\Domain\City;
 
 interface CitiesProvider
 {

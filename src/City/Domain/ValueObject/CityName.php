@@ -1,6 +1,6 @@
 <?php
 
-namespace MusementWeather\Domain\ValueObject;
+namespace MusementWeather\City\Domain\ValueObject;
 
 class CityName
 {

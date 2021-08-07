@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use MusementWeather\City\Domain\CitiesProvider;
+use MusementWeather\City\Infrastructure\MusementApiCityProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,7 +15,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(CitiesProvider::class, MusementApiCityProvider::class);
     }
 
     /**

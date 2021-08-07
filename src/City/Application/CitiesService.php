@@ -1,11 +1,11 @@
 <?php
 
-namespace MusementWeather\Application;
+namespace MusementWeather\City\Application;
 
-use MusementWeather\Domain\CitiesProvider;
-use MusementWeather\Domain\City;
+use MusementWeather\City\Domain\CitiesProvider;
+use MusementWeather\Shared\Domain\City;
 
-class AllCitiesService
+class CitiesService
 {
     public function __construct(private CitiesProvider $citiesProvider)
     {
@@ -14,7 +14,7 @@ class AllCitiesService
     /**
      * @return City[]
      */
-    public function get(): array
+    public function getAll(): array
     {
         return $this->citiesProvider->all();
     }
