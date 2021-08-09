@@ -20,10 +20,11 @@ class WeatherApiProvider implements WeatherProvider
      */
     public function getByCity(City $city): CityWeather
     {
+        $apiKey = env('WEATHER_API_KEY') ?? throw new \Exception('Weather API Key not found');
         $weatherApiResponse = Http::get(
             env('WEATHER_BASE_URL') . '/v1/forecast.json',
             [
-                'key' => env('WEATHER_API_KEY'),
+                'key' => $apiKey,
                 'q' => (string)$city->getCoordinates(),
                 'days' => env('WEATHER_MAX_DAYS_RETRIEVE')
             ]
