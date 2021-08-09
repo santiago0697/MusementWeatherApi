@@ -1,3 +1,5 @@
+# Santiago Correa Muñoz
+
 # Set up
 
 For setup this project run this commands inside directory:
