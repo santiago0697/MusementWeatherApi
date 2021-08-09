@@ -6,6 +6,7 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Http;
 use MusementWeather\Shared\Domain\City;
+use MusementWeather\Weather\Domain\Exception\CannotRetrieveWeather;
 use MusementWeather\Weather\Domain\Weather;
 use MusementWeather\Weather\Infrastructure\WeatherApiProvider;
 use Tests\Mother\CityMother;
@@ -75,5 +76,23 @@ class WeatherApiProviderTest extends TestCase
                 'date' => $weather->getDateTime()->format('Y-m-d')
             ])
             ->toArray();
+    }
+
+    /**
+     * @test
+     */
+    public function exception_when_api_call_fails()
+    {
+        $city = $this->cityMother->get();
+
+        Http::fake(
+            [
+                '*' => Http::response("", 403)
+            ]
+        );
+        $this->expectException(CannotRetrieveWeather::class);
+
+        $weatherApiProvider = new WeatherApiProvider();
+        $weatherApiProvider->getByCity($city);
     }
 }

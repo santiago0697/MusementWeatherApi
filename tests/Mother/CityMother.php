@@ -12,6 +12,7 @@ use MusementWeather\Shared\Domain\ValueObject\CityName;
 class CityMother
 {
     private Generator $faker;
+
     public function __construct()
     {
         $this->faker = Factory::create('ES_es');
@@ -21,7 +22,10 @@ class CityMother
     {
         return new City(
             $cityName ?? new CityName($this->faker->city()),
-            $coordinates ?? new Coordinates($this->faker->randomFloat(), $this->faker->randomFloat())
+            $coordinates ?? new Coordinates(
+                $this->faker->randomFloat(null, -100, 100),
+                $this->faker->randomFloat()
+            )
         );
     }
 
