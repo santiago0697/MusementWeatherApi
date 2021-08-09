@@ -12,11 +12,11 @@ class Weather
     }
 
     /**
-     * @return WatherDescription
+     * @return string
      */
-    public function getDescription(): WatherDescription
+    public function getDescription(): string
     {
-        return $this->description;
+        return $this->description->getWeatherDescription();
     }
 
     /**

@@ -15,11 +15,11 @@ class CityWeather
     }
 
     /**
-     * @return CityName
+     * @return string
      */
-    public function getCityName(): CityName
+    public function getCityName(): string
     {
-        return $this->cityName;
+        return $this->cityName->getName();
     }
 
     /**
@@ -28,5 +28,12 @@ class CityWeather
     public function getWeathers(): array
     {
         return $this->weathers;
+    }
+
+    public function getWeathersFormatted(): string
+    {
+        return collect($this->weathers)
+            ->map(fn(Weather $weather) => $weather->getDescription())
+            ->join(' - ');
     }
 }

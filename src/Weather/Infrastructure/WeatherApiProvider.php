@@ -8,6 +8,7 @@ use MusementWeather\Shared\Domain\City;
 use MusementWeather\Shared\Domain\ValueObject\CityName;
 use MusementWeather\Weather\Domain\CityWeather;
 use MusementWeather\Weather\Domain\Exception\CannotRetrieveWeather;
+use MusementWeather\Weather\Domain\ValueObject\WatherDescription;
 use MusementWeather\Weather\Domain\Weather;
 use MusementWeather\Weather\Domain\WeatherProvider;
 
@@ -29,9 +30,14 @@ class WeatherApiProvider implements WeatherProvider
         );
         $weatherApiResponse->onError(fn() => throw new CannotRetrieveWeather($city));
         $cityName = $weatherApiResponse->json('location')['name'];
-        $forecasts = $weatherApiResponse->json('forecast')['forcastday'];
+        $forecasts = $weatherApiResponse->json('forecast')['forecastday'];
         $weathers = collect($forecasts)
-            ->map(fn($forecast) => new Weather($forecast['day']['condition']['text'], new Carbon($forecast['date'])))
+            ->map(
+                fn($forecast) => new Weather(
+                    new WatherDescription($forecast['day']['condition']['text']),
+                    new Carbon($forecast['date'])
+                )
+            )
             ->toArray();
 
         return new CityWeather(new CityName($cityName), $weathers);
