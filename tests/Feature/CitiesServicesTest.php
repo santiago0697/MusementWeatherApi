@@ -2,11 +2,10 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\WithFaker;
 use Mockery\MockInterface;
 use MusementWeather\City\Application\CitiesService;
-use MusementWeather\City\Domain\CannotRetrieveCities;
 use MusementWeather\City\Domain\CitiesProvider;
+use MusementWeather\City\Domain\Exception\CannotRetrieveCities;
 use Tests\Mother\CityMother;
 use Tests\TestCase;
 

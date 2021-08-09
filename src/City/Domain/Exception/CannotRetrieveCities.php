@@ -1,6 +1,6 @@
 <?php
 
-namespace MusementWeather\City\Domain;
+namespace MusementWeather\City\Domain\Exception;
 
 use Exception;
 

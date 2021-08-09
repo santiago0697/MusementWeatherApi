@@ -2,8 +2,8 @@
 
 namespace MusementWeather\City\Application;
 
-use MusementWeather\City\Domain\CannotRetrieveCities;
 use MusementWeather\City\Domain\CitiesProvider;
+use MusementWeather\City\Domain\Exception\CannotRetrieveCities;
 use MusementWeather\Shared\Domain\City;
 
 class CitiesService

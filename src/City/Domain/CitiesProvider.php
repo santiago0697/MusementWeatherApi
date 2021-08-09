@@ -2,13 +2,14 @@
 
 namespace MusementWeather\City\Domain;
 
+use MusementWeather\City\Domain\Exception\CannotRetrieveCities;
 use MusementWeather\Shared\Domain\City;
 
 interface CitiesProvider
 {
     /**
-     * @throws CannotRetrieveCities
      * @return City[]
+     * @throws CannotRetrieveCities
      */
     public function all(): array;
 }
