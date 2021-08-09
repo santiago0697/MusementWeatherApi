@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use DateTime;
 use Faker\Factory;
 use Faker\Generator;
+use Illuminate\Support\Collection;
 use MusementWeather\Weather\Domain\ValueObject\WatherDescription;
 use MusementWeather\Weather\Domain\Weather;
 
@@ -24,5 +25,12 @@ class WeatherMother
             $weatherDescription ?? new WatherDescription($this->faker->slug(2)),
             $dateTime ?? Carbon::now()->startOfDay()
         );
+    }
+
+    public function getWeathers(int $days): array
+    {
+        return Collection::times($days)
+            ->map(fn() => $this->get())
+            ->toArray();
     }
 }

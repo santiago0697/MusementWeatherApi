@@ -32,9 +32,9 @@ class CityMother
     /**
      * @return City[]
      */
-    public function getMultipleCities(): array
+    public function getMultipleCities(int $quantity = null): array
     {
-        return Collection::times($this->faker->numberBetween(5, 10))
+        return Collection::times($quantity ?? $this->faker->numberBetween(5, 10))
             ->map(fn() => $this->get())
             ->toArray();
     }
