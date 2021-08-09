@@ -3,6 +3,7 @@
 namespace MusementWeather\City\Infrastructure;
 
 use Illuminate\Support\Facades\Http;
+use MusementWeather\City\Domain\CannotRetrieveCities;
 use MusementWeather\City\Domain\CitiesProvider;
 use MusementWeather\City\Domain\ValueObject\Coordinates;
 use MusementWeather\Shared\Domain\ValueObject\CityName;
@@ -12,6 +13,7 @@ class MusementApiCityProvider implements CitiesProvider
 {
     /**
      * @inheritDoc
+     * @throws CannotRetrieveCities
      */
     public function all(): array
     {
@@ -21,6 +23,8 @@ class MusementApiCityProvider implements CitiesProvider
                 'Content-Type' => 'application/json'
             ]
         )->get('https://api.musement.com/api/v3/cities');
+
+        $apiResponse->onError(fn() => throw new CannotRetrieveCities());
 
         return collect($apiResponse->json())
             ->map(

@@ -7,6 +7,7 @@ use MusementWeather\Shared\Domain\City;
 interface CitiesProvider
 {
     /**
+     * @throws CannotRetrieveCities
      * @return City[]
      */
     public function all(): array;
