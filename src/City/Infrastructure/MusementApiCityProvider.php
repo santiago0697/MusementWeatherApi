@@ -4,8 +4,8 @@ namespace MusementWeather\City\Infrastructure;
 
 use Illuminate\Support\Facades\Http;
 use MusementWeather\City\Domain\CitiesProvider;
-use MusementWeather\City\Domain\ValueObject\CityName;
 use MusementWeather\City\Domain\ValueObject\Coordinates;
+use MusementWeather\Shared\Domain\ValueObject\CityName;
 use MusementWeather\Shared\Domain\City;
 
 class MusementApiCityProvider implements CitiesProvider

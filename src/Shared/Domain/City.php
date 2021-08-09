@@ -3,7 +3,7 @@
 namespace MusementWeather\Shared\Domain;
 
 use MusementWeather\City\Domain\ValueObject\Coordinates;
-use MusementWeather\City\Domain\ValueObject\CityName;
+use MusementWeather\Shared\Domain\ValueObject\CityName;
 
 class City
 {
