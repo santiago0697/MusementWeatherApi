@@ -2,6 +2,7 @@
 
 namespace MusementWeather\Weather\Infrastructure;
 
+use Illuminate\Http\Client\Response;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Http;
 use MusementWeather\Shared\Domain\City;
@@ -29,7 +30,14 @@ class WeatherApiProvider implements WeatherProvider
                 'days' => env('WEATHER_MAX_DAYS_RETRIEVE')
             ]
         );
-        $weatherApiResponse->onError(fn() => throw new CannotRetrieveWeather($city));
+
+        $weatherApiResponse->onError(function (Response $response) use ($city) {
+            if ($response->status() == 401) {
+                throw new \Exception('Invalid api key');
+            }
+            throw new CannotRetrieveWeather($city);
+        });
+
         $cityName = $weatherApiResponse->json('location')['name'];
         $forecasts = $weatherApiResponse->json('forecast')['forecastday'];
         $weathers = collect($forecasts)
