@@ -11,7 +11,7 @@ docker-compose up -d --build
 __This will launch docker instances__
 
 ```bash
-docker-compose exec php composer install && compose run post-root-package-install
+docker-compose exec php composer install && composer run post-root-package-install
 ```
 
 __This will install all dependencies that the project needs__
