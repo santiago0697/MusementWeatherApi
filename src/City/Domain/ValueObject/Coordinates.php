@@ -2,7 +2,9 @@
 
 namespace MusementWeather\City\Domain\ValueObject;
 
-class Coordinates
+use Stringable;
+
+class Coordinates implements Stringable
 {
     public function __construct(private float $latitude, private float $longitude)
     {
@@ -22,5 +24,10 @@ class Coordinates
     public function getLongitude(): float
     {
         return $this->longitude;
+    }
+
+    public function __toString()
+    {
+        return "{$this->getLatitude()},{$this->getLongitude()}";
     }
 }
