@@ -1,0 +1,70 @@
+openapi: 3.0.3
+info:
+  title: Api musement
+  description: Api musement
+  version: 1.0.0
+servers:
+  - url: 'https://api.musement.com'
+paths:
+  /api/v3/cities/{cityId}/forecast:
+    post:
+      summary: Set forecast for the given city
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Forecast'
+        required: true
+      responses:
+        '201':
+          description: Forecast set for the given city
+        '400':
+          description: Invalid forecast given
+        '404':
+          description: City not found
+    get:
+      summary: Get forecasts of the given city
+      description: You can retrieve forecast of cities giving or not date intervals
+      parameters:
+        - name: start_date
+          in: query
+          description: Start date for get forecast, if not provided will retrieve from today
+          required: false
+          schema:
+            type: string
+            format: date
+            example: 2021-08-15
+        - name: end_date
+          in: query
+          description: End date for get forecast, if not provided will retrieve until today
+          required: false
+          schema:
+            type: string
+            format: date
+            example: 2021-08-30
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Forecast'
+        '404':
+          description: City not found
+components:
+  schemas:
+    Forecast:
+      required:
+        - description
+        - date
+      type: object
+      properties:
+        description:
+          type: string
+          example: Sunny
+        date:
+          type: string
+          format: date
+          example: 2021-08-19
